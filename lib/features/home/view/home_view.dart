@@ -3,9 +3,10 @@ import 'package:ai_food/core/extensions/icon_extensions.dart';
 import 'package:ai_food/features/home/cubit/scanner_cubit.dart';
 import 'package:ai_food/features/home/cubit/scanner_state.dart';
 import 'package:ai_food/features/home/view/mixin/home_view_mixin.dart';
+import 'package:ai_food/features/home/widgets/food_card.dart';
+import 'package:ai_food/features/home/widgets/mood_selector.dart';
 import 'package:ai_food/features/qr/view/qr_view.dart';
 import 'package:ai_food/locator.dart';
-import 'package:ai_food/product/initialize/enums/mood_enums.dart';
 import 'package:ai_food/product/utils/constants/icon_constants.dart';
 import 'package:ai_food/product/utils/constants/string_constants.dart';
 import 'package:ai_food/product/widgets/custom_elevated_button.dart';
@@ -29,49 +30,40 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(StringConstants.appTitle),
-          centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Center(child: ScannerButton()),
-            SizedBox(height: context.height2),
-            BlocBuilder<ScannerCubit, ScannerState>(
-              builder: (context, state) {
-                return switch (state.status) {
-                  ScannerStatus.initial => CustomElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Qr Kodunu Okutunuz'),
-                    ),
-                  ScannerStatus.loading => const CircularProgressIndicator(),
-                  ScannerStatus.loaded => Column(
-                      children: [
-                        DropdownButton(
-                          hint: const Text('Ruh Halinizi Seçiniz'),
-                          value: state.mood,
-                          items: Mood.values.map((mood) {
-                            return DropdownMenuItem(
-                              value: mood.name,
-                              child: Text(mood.value),
-                            );
-                          }).toList(),
-                          onChanged: (value) {
-                            if (value == null) return;
-                            setState(() {
-                              scannerCubit.setMood(value);
-                            });
-                          },
+        body: BlocBuilder<ScannerCubit, ScannerState>(
+          builder: (context, state) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (!state.isScanned)
+                    ScannerButton()
+                  else
+                    Expanded(
+                      flex: 2,
+                      child: PageView.builder(
+                        itemCount: state.foods?.length ?? 0,
+                        itemBuilder: (context, index) => FoodCard(
+                          food: state.foods![index],
                         ),
-                        CustomElevatedButton(
-                          onPressed: () {},
-                          child: Text(state.barcode ?? ''),
-                        ),
-                      ],
+                      ),
                     ),
-                  ScannerStatus.error => Text(state.errorMessage ?? ''),
-                };
-              },
-            ),
-          ],
+                  const Spacer(),
+                  switch (state.status) {
+                    ScannerStatus.initial => CustomElevatedButton(
+                        onPressed: () {},
+                        child: const Text(StringConstants.qrCodeButton),
+                      ),
+                    ScannerStatus.loading => const CircularProgressIndicator(),
+                    ScannerStatus.loaded => const MoodSelector(),
+                    ScannerStatus.error => Text(state.errorMessage ?? ''),
+                  },
+                  const Spacer(),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
