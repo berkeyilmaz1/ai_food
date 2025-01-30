@@ -1,5 +1,4 @@
-import 'package:ai_food/features/home/cubit/scanner_cubit.dart';
-import 'package:ai_food/locator.dart';
+import 'package:ai_food/features/qr/view/mixin/qr_view_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -11,37 +10,17 @@ class QrView extends StatefulWidget {
   State<QrView> createState() => _QrViewState();
 }
 
-class _QrViewState extends State<QrView> {
-  final MobileScannerController _controller = MobileScannerController();
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class _QrViewState extends State<QrView> with QrViewMixin {
   @override
   Widget build(BuildContext context) {
-    final scannerCubit = locator<ScannerCubit>();
-
     return BlocProvider.value(
       value: scannerCubit,
       child: Scaffold(
         body: MobileScanner(
-          controller: _controller,
-          onDetect: (capture) {
-            try {
-              scannerCubit.changeLoading();
-              final barcodes = capture.barcodes;
-              if (barcodes.isNotEmpty && barcodes.first.rawValue == null) {
-                return scannerCubit.changeError('Barcode not found');
-              }
-              scannerCubit.getBarcode(barcodes.first.rawValue!);
-              print('popppppppppp');
-              Navigator.of(context).pop();
-            } catch (e) {
-              print('try catch $e');
-            }
-          },
+          controller: controller,
+          onDetect: onDetect,
+
+          ///TODO: ADD AN OVERLAY
         ),
       ),
     );

@@ -6,7 +6,6 @@ final class ScannerCubit extends Cubit<ScannerState> {
 
   void getBarcode(String barcode) {
     emit(state.copyWith(status: ScannerStatus.loaded, barcode: barcode));
-    print('status from cubit: ${state.status}');
   }
 
   void changeLoading() {
