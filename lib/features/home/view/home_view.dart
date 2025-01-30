@@ -21,15 +21,6 @@ final class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> with HomeViewMixin {
-  late final ScannerCubit _scannerCubit;
-  ScannerCubit get scannerCubit => _scannerCubit;
-
-  @override
-  void initState() {
-    super.initState();
-    _scannerCubit = ScannerCubit();
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -41,13 +32,15 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
         ),
         body: Column(
           children: [
-            const Center(child: ScannerButton()),
+            Center(child: ScannerButton()),
             SizedBox(height: context.height2),
             BlocBuilder<ScannerCubit, ScannerState>(
               builder: (context, state) {
-                print('state status:${state.status} barcode:${state.barcode}');
                 return switch (state.status) {
-                  ScannerStatus.initial => const SizedBox.shrink(),
+                  ScannerStatus.initial => CustomElevatedButton(
+                      onPressed: () {},
+                      child: const Text('Qr Kodunu Okutunuz'),
+                    ),
                   ScannerStatus.loading => const CircularProgressIndicator(),
                   ScannerStatus.loaded => CustomElevatedButton(
                       onPressed: () {},
