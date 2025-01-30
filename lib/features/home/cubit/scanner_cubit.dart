@@ -8,6 +8,11 @@ final class ScannerCubit extends Cubit<ScannerState> {
     emit(state.copyWith(status: ScannerStatus.loaded, barcode: barcode));
   }
 
+  void setMood(String mood) {
+    emit(state.copyWith(mood: mood));
+    print(state.mood);
+  }
+
   void changeLoading() {
     emit(state.copyWith(status: ScannerStatus.loading));
   }

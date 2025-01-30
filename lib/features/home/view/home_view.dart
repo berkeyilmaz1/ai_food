@@ -5,6 +5,7 @@ import 'package:ai_food/features/home/cubit/scanner_state.dart';
 import 'package:ai_food/features/home/view/mixin/home_view_mixin.dart';
 import 'package:ai_food/features/qr/view/qr_view.dart';
 import 'package:ai_food/locator.dart';
+import 'package:ai_food/product/initialize/enums/mood_enums.dart';
 import 'package:ai_food/product/utils/constants/icon_constants.dart';
 import 'package:ai_food/product/utils/constants/string_constants.dart';
 import 'package:ai_food/product/widgets/custom_elevated_button.dart';
@@ -24,7 +25,7 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: locator<ScannerCubit>(),
+      value: scannerCubit,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(StringConstants.appTitle),
@@ -42,9 +43,29 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
                       child: const Text('Qr Kodunu Okutunuz'),
                     ),
                   ScannerStatus.loading => const CircularProgressIndicator(),
-                  ScannerStatus.loaded => CustomElevatedButton(
-                      onPressed: () {},
-                      child: Text(state.barcode ?? ''),
+                  ScannerStatus.loaded => Column(
+                      children: [
+                        DropdownButton(
+                          hint: const Text('Ruh Halinizi Seçiniz'),
+                          value: state.mood,
+                          items: Mood.values.map((mood) {
+                            return DropdownMenuItem(
+                              value: mood.name,
+                              child: Text(mood.value),
+                            );
+                          }).toList(),
+                          onChanged: (value) {
+                            if (value == null) return;
+                            setState(() {
+                              scannerCubit.setMood(value);
+                            });
+                          },
+                        ),
+                        CustomElevatedButton(
+                          onPressed: () {},
+                          child: Text(state.barcode ?? ''),
+                        ),
+                      ],
                     ),
                   ScannerStatus.error => Text(state.errorMessage ?? ''),
                 };
