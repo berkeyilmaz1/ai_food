@@ -1,4 +1,4 @@
-import 'package:ai_food/features/home/cubit/scannar_cubit.dart';
+import 'package:ai_food/features/home/cubit/scanner_cubit.dart';
 import 'package:ai_food/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
