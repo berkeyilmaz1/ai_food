@@ -38,9 +38,6 @@ final class WidgetSizes {
   /// [twelve] is a constant that holds the value of 12.
   static const double twelve = 12;
 
-  /// [sixteenth] is a constant that holds the value of 16.
-  static const double sixteenth = 16;
-
   /// [eighteenth] is a constant that holds the value of 18.
   static const double eighteenth = 18;
 
