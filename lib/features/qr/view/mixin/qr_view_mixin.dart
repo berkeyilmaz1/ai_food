@@ -27,7 +27,11 @@ mixin QrViewMixin on State<QrView> {
     if (barcodes.isNotEmpty && barcodes.first.rawValue == null) {
       return scannerCubit.changeError('Barcode not found');
     }
-    scannerCubit.getBarcode(barcodes.first.rawValue!);
+
+    /// aslında şuan barcode'u ekrana yazdırmadıgım için getBarcode fonksiyonunu çağırmama gerek yok
+    scannerCubit
+      ..getBarcode(barcodes.first.rawValue!)
+      ..getFoods(barcodes.first.rawValue!);
     _controller.stop();
     Navigator.pop(context);
   }

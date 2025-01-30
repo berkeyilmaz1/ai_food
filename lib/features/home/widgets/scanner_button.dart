@@ -10,7 +10,6 @@ final class ScannerButton extends StatelessWidget {
     return Card(
       child: IconButton(
         onPressed: () {
-          scannerCubit.changeLoading();
           Navigator.of(context).push(
             MaterialPageRoute<QrView>(builder: (_) => const QrView()),
           );
