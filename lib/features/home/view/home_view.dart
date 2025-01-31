@@ -43,6 +43,7 @@ class _HomeViewState extends State<HomeView> with HomeViewMixin {
                     Expanded(
                       flex: 2,
                       child: PageView.builder(
+                        controller: pageController,
                         itemCount: state.foods?.length ?? 0,
                         itemBuilder: (context, index) => FoodCard(
                           food: state.foods![index],

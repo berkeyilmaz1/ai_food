@@ -26,6 +26,20 @@ final class ScannerCubit extends Cubit<ScannerState> {
     );
   }
 
+  void reScan() {
+    emit(
+      state.copyWith(
+        isScanned: false,
+        status: ScannerStatus.initial,
+        barcode: '',
+        errorMessage: '',
+        // ignore: avoid_redundant_argument_values
+        mood: null,
+        foods: [],
+      ),
+    );
+  }
+
   void setMood(String mood) {
     emit(state.copyWith(mood: mood));
   }

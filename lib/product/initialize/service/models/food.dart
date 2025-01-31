@@ -101,4 +101,14 @@ final class Food with EquatableMixin {
       spoonacularSourceUrl: spoonacularSourceUrl ?? this.spoonacularSourceUrl,
     );
   }
+
+  List<String> get dietaryFlags {
+    return [
+      if (vegetarian == true) 'Vegetarian',
+      if (vegan == true) 'Vegan',
+      if (glutenFree == true) 'Gluten Free',
+      if (dairyFree == true) 'Dairy Free',
+      if (veryHealthy == true) 'Healthy',
+    ];
+  }
 }

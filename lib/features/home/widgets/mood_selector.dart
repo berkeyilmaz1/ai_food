@@ -47,6 +47,18 @@ class _MoodSelectorState extends State<MoodSelector> {
               onPressed: () {},
               child: const Text(StringConstants.getRecommendation),
             ),
+            GestureDetector(
+              onTap: () {
+                _scannerCubit.reScan();
+                setState(() {});
+              },
+              child: Text(
+                StringConstants.reScan,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Colors.grey.shade500,
+                    ),
+              ),
+            ),
           ],
         );
       },
