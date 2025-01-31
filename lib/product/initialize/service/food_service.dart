@@ -1,11 +1,12 @@
-import 'package:ai_food/api.dart';
+import 'package:ai_food/product/initialize/config/app_environment.dart';
 import 'package:ai_food/product/initialize/service/models/food.dart';
+import 'package:ai_food/product/utils/constants/string_constants.dart';
 import 'package:dio/dio.dart';
 
 final class FoodService {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: ApiKey.baseUrl,
+      baseUrl: AppEnvironmentItems.baseUrl.value,
     ),
   );
 
@@ -13,6 +14,10 @@ final class FoodService {
     try {
       final response = await _dio.get<Map<String, dynamic>>(
         path,
+        queryParameters: {
+          'apiKey': AppEnvironmentItems.apiKey,
+          'number': StringConstants.number,
+        },
       );
 
       if (response.data == null) return null;
