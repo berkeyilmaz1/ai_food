@@ -8,11 +8,13 @@ final class AppEnvironment {
 
   static String get apiKey => _config.menuApi;
   static String get baseUrl => _config.baseUrl;
+  static String get geminiApiKey => _config.geminiApi;
 }
 
 enum AppEnvironmentItems {
   apiKey,
-  baseUrl;
+  baseUrl,
+  geminiApi;
 
   String get value {
     switch (this) {
@@ -20,6 +22,8 @@ enum AppEnvironmentItems {
         return AppEnvironment.apiKey;
       case AppEnvironmentItems.baseUrl:
         return AppEnvironment.baseUrl;
+      case AppEnvironmentItems.geminiApi:
+        return AppEnvironment.geminiApiKey;
     }
   }
 }

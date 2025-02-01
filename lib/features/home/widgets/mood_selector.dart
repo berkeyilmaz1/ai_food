@@ -1,3 +1,5 @@
+import 'package:ai_food/core/extensions/custom_future_extension.dart';
+import 'package:ai_food/core/service/gemini_manager.dart';
 import 'package:ai_food/core/utils/widget_sizes.dart';
 import 'package:ai_food/features/home/cubit/scanner_cubit.dart';
 import 'package:ai_food/features/home/cubit/scanner_state.dart';
@@ -19,6 +21,22 @@ class MoodSelector extends StatefulWidget {
 
 class _MoodSelectorState extends State<MoodSelector> {
   final _scannerCubit = locator<ScannerCubit>();
+
+  Future<void> _getRecommendation() async {
+    final state = _scannerCubit.state;
+    if (state.mood == null && state.foods == null) return;
+    final response = await GeminiManager()
+        .executePrompt(
+          state.foods!
+              .map(
+                (food) => 'Food Name:${food.title},Food Image: ${food.image}',
+              )
+              .toList(),
+          state.mood!,
+        )
+        .makeWithLoadingDialog(context: context);
+    print('response: $response');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +62,10 @@ class _MoodSelectorState extends State<MoodSelector> {
               },
             ),
             CustomElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                if (state.mood == null && state.foods == null) return;
+                await _getRecommendation();
+              },
               child: const Text(StringConstants.getRecommendation),
             ),
             GestureDetector(
