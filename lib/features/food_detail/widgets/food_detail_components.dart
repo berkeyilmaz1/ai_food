@@ -45,7 +45,7 @@ final class FoodDetailImage extends StatelessWidget {
       child: Image.network(
         food.image ?? '',
         width: double.infinity,
-        height: 250,
+        height: WidgetSizes.twoHundredFifty,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) => const Center(
           child: Icon(Icons.image_not_supported, size: WidgetSizes.oneHundred),
@@ -58,18 +58,24 @@ final class FoodDetailImage extends StatelessWidget {
 final class DetailDietaryInfo extends StatelessWidget {
   const DetailDietaryInfo({required this.dietary, super.key});
   final List<String> dietary;
+
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: WidgetSizes.eight,
-      children: dietary
-          .map(
-            (flag) => Chip(
-              label: Text(flag),
-              backgroundColor: Colors.green.shade100,
-            ),
-          )
-          .toList(),
+    if (dietary.isEmpty) return const SizedBox.shrink();
+    return SizedBox(
+      height: WidgetSizes.fifty,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: dietary.length,
+        padding: EdgeInsets.zero,
+        itemBuilder: (context, index) => Padding(
+          padding: const EdgeInsets.only(right: WidgetSizes.eight),
+          child: Chip(
+            label: Text(dietary[index]),
+            backgroundColor: Colors.green.shade100,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -87,7 +93,6 @@ final class DetailIngredients extends StatelessWidget {
     if (food.extendedIngredients == null || food.extendedIngredients!.isEmpty) {
       return const SizedBox.shrink();
     }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: WidgetSizes.eight,
@@ -96,18 +101,25 @@ final class DetailIngredients extends StatelessWidget {
           StringConstants.ingredients,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        Wrap(
-          spacing: WidgetSizes.eight,
-          children: food.extendedIngredients!
-              .map(
-                (ingredient) => Chip(
+        SizedBox(
+          height: WidgetSizes.fifty,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: food.extendedIngredients!.length,
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              final ingredient = food.extendedIngredients![index];
+              return Padding(
+                padding: const EdgeInsets.only(right: WidgetSizes.eight),
+                child: Chip(
                   label: Text(
                     '${ingredient.amount} ${ingredient.unit} ${ingredient.nameClean}',
                   ),
                   backgroundColor: Colors.purple.shade100,
                 ),
-              )
-              .toList(),
+              );
+            },
+          ),
         ),
       ],
     );
@@ -124,6 +136,9 @@ final class DetailCuisine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (food.cuisines == null || food.cuisines!.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: WidgetSizes.eight,
@@ -132,16 +147,20 @@ final class DetailCuisine extends StatelessWidget {
           StringConstants.cuisines,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        Wrap(
-          spacing: WidgetSizes.eight,
-          children: food.cuisines!
-              .map(
-                (cuisine) => Chip(
-                  label: Text(cuisine),
-                  backgroundColor: Colors.blue.shade100,
-                ),
-              )
-              .toList(),
+        SizedBox(
+          height: WidgetSizes.fifty,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: food.cuisines!.length,
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(right: WidgetSizes.eight),
+              child: Chip(
+                label: Text(food.cuisines![index]),
+                backgroundColor: Colors.blue.shade100,
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -158,6 +177,9 @@ final class DetailDishTypes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (food.dishTypes == null || food.dishTypes!.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: WidgetSizes.eight,
@@ -166,16 +188,20 @@ final class DetailDishTypes extends StatelessWidget {
           StringConstants.foodType,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        Wrap(
-          spacing: WidgetSizes.eight,
-          children: food.dishTypes!
-              .map(
-                (dishType) => Chip(
-                  label: Text(dishType),
-                  backgroundColor: Colors.orange.shade100,
-                ),
-              )
-              .toList(),
+        SizedBox(
+          height: WidgetSizes.fifty,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: food.dishTypes!.length,
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.only(right: WidgetSizes.eight),
+              child: Chip(
+                label: Text(food.dishTypes![index]),
+                backgroundColor: Colors.orange.shade100,
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -226,6 +252,9 @@ final class DetailDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (food.instructions == null || food.instructions!.isEmpty) {
+      return const SizedBox.shrink();
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: WidgetSizes.eight,

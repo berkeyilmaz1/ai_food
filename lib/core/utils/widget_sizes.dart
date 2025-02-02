@@ -5,6 +5,8 @@ final class WidgetSizes {
   /// [twoHundred] is a constant that holds the value of 200.
   static const double twoHundred = 200;
 
+  /// [twoHundredFifty] is a constant that holds the value of 250.
+  static const double twoHundredFifty = 250;
   /// [oneHundred] is a constant that holds the value of 100.
   static const double oneHundred = 100;
 
