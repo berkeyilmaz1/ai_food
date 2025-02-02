@@ -17,4 +17,5 @@ final class StringConstants {
   static const String foodType = 'Yemek Türü';
   static const String cuisines = 'Mutfaklar';
   static const String description = 'Açıklama';
+  static const String preparation = 'Hazırlanış';
 }

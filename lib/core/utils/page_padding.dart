@@ -14,4 +14,8 @@ final class PagePadding extends EdgeInsets {
 
   /// Padding is 8 [EdgeInsets.all]
   const PagePadding.allSmall() : super.all(WidgetSizes.eight);
+
+  /// Padding is 24 [EdgeInsets.all]
+  const PagePadding.vertical()
+      : super.symmetric(horizontal: WidgetSizes.twentyFour);
 }

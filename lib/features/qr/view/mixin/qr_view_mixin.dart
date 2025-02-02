@@ -28,7 +28,7 @@ mixin QrViewMixin on State<QrView> {
       return scannerCubit.changeError('Barcode not found');
     }
 
-    /// aslında şuan barcode'u ekrana yazdırmadıgım için getBarcode fonksiyonunu çağırmama gerek yok
+  
     scannerCubit
       ..getBarcode(barcodes.first.rawValue!)
       ..getFoods(barcodes.first.rawValue!);

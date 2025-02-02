@@ -12,17 +12,6 @@ final class FoodCard extends StatelessWidget {
   });
   final Food food;
 
-  void navigateToDetail(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute<FoodDetailView>(
-        builder: (context) => FoodDetailView(
-          food: food,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -60,6 +49,17 @@ final class FoodCard extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void navigateToDetail(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute<FoodDetailView>(
+        builder: (context) => FoodDetailView(
+          food: food,
         ),
       ),
     );

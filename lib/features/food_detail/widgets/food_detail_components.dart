@@ -47,7 +47,7 @@ final class FoodDetailImage extends StatelessWidget {
         height: 250,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) => const Center(
-          child: Icon(Icons.image_not_supported, size: 100),
+          child: Icon(Icons.image_not_supported, size: WidgetSizes.oneHundred),
         ),
       ),
     );

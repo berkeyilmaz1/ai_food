@@ -9,14 +9,16 @@ final class ScannerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: IconButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute<QrView>(builder: (_) => const QrView()),
-          );
-        },
+        onPressed: () => navigateToScanner(context),
         icon: IconConstants.scanner.toIcon,
         iconSize: context.width5,
       ),
+    );
+  }
+
+  void navigateToScanner(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<QrView>(builder: (_) => const QrView()),
     );
   }
 }

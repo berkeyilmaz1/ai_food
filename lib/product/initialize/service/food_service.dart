@@ -9,8 +9,7 @@ final class FoodService {
     BaseOptions(
       baseUrl: AppEnvironmentItems.baseUrl.value,
       queryParameters: {
-        ProductConstants.apiKey:
-            AppEnvironmentItems.apiKey.value, // Add .value here
+        ProductConstants.apiKey: AppEnvironmentItems.apiKey.value,
       },
     ),
   );
