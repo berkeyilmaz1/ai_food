@@ -18,4 +18,5 @@ final class StringConstants {
   static const String cuisines = 'Mutfaklar';
   static const String description = 'Açıklama';
   static const String preparation = 'Hazırlanış';
+  static const String ingredients = 'Malzemeler';
 }

@@ -7,17 +7,16 @@ part of 'ingredient.dart';
 // **************************************************************************
 
 Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
-      id: (json['id'] as num).toInt(),
-      aisle: json['aisle'] as String,
-      image: json['image'] as String,
-      consistency: json['consistency'] as String,
-      name: json['name'] as String,
-      nameClean: json['nameClean'] as String,
-      original: json['original'] as String,
-      originalName: json['originalName'] as String,
-      amount: (json['amount'] as num).toDouble(),
-      unit: json['unit'] as String,
-      meta: json['meta'] as List<dynamic>,
+      id: (json['id'] as num?)?.toInt(),
+      aisle: json['aisle'] as String?,
+      image: json['image'] as String?,
+      consistency: json['consistency'] as String?,
+      name: json['name'] as String?,
+      nameClean: json['nameClean'] as String?,
+      original: json['original'] as String?,
+      originalName: json['originalName'] as String?,
+      amount: (json['amount'] as num?)?.toDouble(),
+      unit: json['unit'] as String?,
     );
 
 Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
@@ -32,5 +31,4 @@ Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
       'originalName': instance.originalName,
       'amount': instance.amount,
       'unit': instance.unit,
-      'meta': instance.meta,
     };

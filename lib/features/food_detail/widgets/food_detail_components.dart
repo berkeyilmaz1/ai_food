@@ -24,6 +24,7 @@ final class DetailComponents extends StatelessWidget {
           DetailInfoTile(food: food),
           DetailCuisine(food: food),
           DetailDishTypes(food: food),
+          DetailIngredients(food: food),
           DetailDescription(food: food),
         ],
       ),
@@ -73,8 +74,8 @@ final class DetailDietaryInfo extends StatelessWidget {
   }
 }
 
-final class DetailInfoTile extends StatelessWidget {
-  const DetailInfoTile({
+final class DetailIngredients extends StatelessWidget {
+  const DetailIngredients({
     required this.food,
     super.key,
   });
@@ -83,26 +84,32 @@ final class DetailInfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const PagePadding.allSmall(),
-      child: Row(
-        children: [
-          Expanded(
-            child: MinuteInfoTile(
-              icon: Icons.timer,
-              label: StringConstants.readyTime,
-              value: '${food.readyInMinutes ?? '??'} dakika',
-            ),
-          ),
-          Expanded(
-            child: MinuteInfoTile(
-              icon: Icons.kitchen,
-              label: StringConstants.cookingTime,
-              value: '${food.cookingMinutes ?? '??'} dakika',
-            ),
-          ),
-        ],
-      ),
+    if (food.extendedIngredients == null || food.extendedIngredients!.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: WidgetSizes.eight,
+      children: [
+        Text(
+          StringConstants.ingredients,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        Wrap(
+          spacing: WidgetSizes.eight,
+          children: food.extendedIngredients!
+              .map(
+                (ingredient) => Chip(
+                  label: Text(
+                    '${ingredient.amount} ${ingredient.unit} ${ingredient.nameClean}',
+                  ),
+                  backgroundColor: Colors.purple.shade100,
+                ),
+              )
+              .toList(),
+        ),
+      ],
     );
   }
 }
@@ -171,6 +178,40 @@ final class DetailDishTypes extends StatelessWidget {
               .toList(),
         ),
       ],
+    );
+  }
+}
+
+final class DetailInfoTile extends StatelessWidget {
+  const DetailInfoTile({
+    required this.food,
+    super.key,
+  });
+
+  final Food food;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const PagePadding.allSmall(),
+      child: Row(
+        children: [
+          Expanded(
+            child: MinuteInfoTile(
+              icon: Icons.timer,
+              label: StringConstants.readyTime,
+              value: '${food.readyInMinutes ?? '??'} dakika',
+            ),
+          ),
+          Expanded(
+            child: MinuteInfoTile(
+              icon: Icons.kitchen,
+              label: StringConstants.cookingTime,
+              value: '${food.cookingMinutes ?? '??'} dakika',
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
