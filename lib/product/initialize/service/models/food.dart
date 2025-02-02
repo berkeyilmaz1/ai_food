@@ -1,3 +1,4 @@
+import 'package:ai_food/product/initialize/service/models/ingredient.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -22,6 +23,8 @@ final class Food with EquatableMixin {
     this.dishTypes,
     this.diets,
     this.spoonacularSourceUrl,
+    this.instructions,
+    this.extendedIngredients,
   });
 
   factory Food.fromJson(Map<String, dynamic> json) => _$FoodFromJson(json);
@@ -41,6 +44,8 @@ final class Food with EquatableMixin {
   final List<String>? dishTypes;
   final List<String>? diets;
   final String? spoonacularSourceUrl;
+  final String? instructions;
+  final List<Ingredient>? extendedIngredients;
 
   Map<String, dynamic> toJson() => _$FoodToJson(this);
 
@@ -62,6 +67,8 @@ final class Food with EquatableMixin {
         dishTypes,
         diets,
         spoonacularSourceUrl,
+        instructions,
+        extendedIngredients,
       ];
 
   Food copyWith({
@@ -81,6 +88,8 @@ final class Food with EquatableMixin {
     List<String>? dishTypes,
     List<String>? diets,
     String? spoonacularSourceUrl,
+    String? instructions,
+    List<Ingredient>? extendedIngredients,
   }) {
     return Food(
       vegetarian: vegetarian ?? this.vegetarian,
@@ -99,6 +108,8 @@ final class Food with EquatableMixin {
       dishTypes: dishTypes ?? this.dishTypes,
       diets: diets ?? this.diets,
       spoonacularSourceUrl: spoonacularSourceUrl ?? this.spoonacularSourceUrl,
+      instructions: instructions ?? this.instructions,
+      extendedIngredients: extendedIngredients ?? this.extendedIngredients,
     );
   }
 

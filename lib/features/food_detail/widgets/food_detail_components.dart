@@ -194,7 +194,7 @@ final class DetailDescription extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Text(
-          food.summary ?? '',
+          food.instructions ?? '',
           style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],

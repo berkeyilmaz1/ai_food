@@ -28,6 +28,10 @@ Food _$FoodFromJson(Map<String, dynamic> json) => Food(
       diets:
           (json['diets'] as List<dynamic>?)?.map((e) => e as String).toList(),
       spoonacularSourceUrl: json['spoonacularSourceUrl'] as String?,
+      instructions: json['instructions'] as String?,
+      extendedIngredients: (json['extendedIngredients'] as List<dynamic>?)
+          ?.map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$FoodToJson(Food instance) => <String, dynamic>{
@@ -47,4 +51,6 @@ Map<String, dynamic> _$FoodToJson(Food instance) => <String, dynamic>{
       'dishTypes': instance.dishTypes,
       'diets': instance.diets,
       'spoonacularSourceUrl': instance.spoonacularSourceUrl,
+      'instructions': instance.instructions,
+      'extendedIngredients': instance.extendedIngredients,
     };
