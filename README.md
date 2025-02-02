@@ -4,8 +4,7 @@ This is a **Food Suggestion App** that uses **Generative AI** to provide persona
 
 ## 📽️ Demo  
 
- ![ai_food](https://github.com/user-attachments/assets/cc2c5553-287f-4206-b608-51e4d580d52d)
-
+![ai_food](https://github.com/user-attachments/assets/c01a5758-b33e-4408-935e-a81d758d6089)
 
 ---
 ## 📌 Setup & Installation  
