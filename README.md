@@ -30,10 +30,11 @@ Add the following content inside the .env file:
  ```
 baseUrl="https://api.spoonacular.com/recipes/"
 menuApi="yourapikey" 
-geminiApi="yourapikey"  ->>>> This is the Gemini key
+geminiApi="yourapikey"
  ```
 menuApi    ->>>> This is the [Spoonacular](https://spoonacular.com/food-api) key <br>
-geminiApi  ->>>> This is the Gemini key
+geminiApi  ->>>> This is the Gemini key<br>
+
 5.**Generate the environment variables:** 
  ```
  flutter pub run build_runner build --delete-conflicting-outputs
