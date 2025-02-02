@@ -29,8 +29,8 @@ assets/env/.env
 Add the following content inside the .env file:
  ```
 baseUrl="https://api.spoonacular.com/recipes/"
-menuApi="yourapikey"
-geminiApi="yourapikey"
+menuApi="yourapikey"  ->>>> This is the https://spoonacular.com/food-api key
+geminiApi="yourapikey"  ->>>> This is the Gemini key
  ```
 5.**Generate the environment variables:** 
  ```
